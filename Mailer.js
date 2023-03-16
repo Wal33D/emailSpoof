@@ -25,10 +25,12 @@ class EmailSender {
     // Prompt the user to enter email details and call sendEmail method
     sendEmailPrompt() {
         this.rl.question('Enter recipient email: ', (to) => {
-            this.rl.question('Enter subject: ', (subject) => {
-                this.rl.question('Enter text: ', (text) => {
-                    this.rl.question('Enter HTML: ', (html) => {
-                        this.sendEmail(to, subject, text, html);
+            this.rl.question('Enter sender email: ', (from) => {
+                this.rl.question('Enter subject: ', (subject) => {
+                    this.rl.question('Enter text: ', (text) => {
+                        this.rl.question('Enter HTML: ', (html) => {
+                            this.sendEmail(from, to, subject, text, html);
+                        });
                     });
                 });
             });
@@ -36,9 +38,9 @@ class EmailSender {
     }
 
     // Send the email using nodemailer
-    sendEmail(to, subject, text, html) {
+    sendEmail(from, to, subject, text, html) {
         const mailOptions = {
-            from: "hitachik023@gmail.com",
+            from: from,
             to: to,
             subject: subject,
             text: text,
